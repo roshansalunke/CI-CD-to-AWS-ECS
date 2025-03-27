@@ -50,11 +50,12 @@ resource "aws_ecs_task_definition" "demo_task" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = "512"
   memory                   = "1024"
+  execution_role_arn       = "arn:aws:iam::325961785170:role/ecsTaskExecutionRole"  # Replace with your actual AWS Account ID
 
   container_definitions = jsonencode([
     {
       name      = "demo-app",
-      image     = "${aws_ecr_repository.demo_app.repository_url}:latest",
+      image     = "325961785170.dkr.ecr.ap-southeast-1.amazonaws.com/demo-app:latest",
       essential = true,
       portMappings = [{
         containerPort = 4000
